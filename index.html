@@ -17,7 +17,7 @@
         const syote = document.getElementById('syote');
         document.getElementById('nappi').onclick = () => {
             tyhjennäTulosalue();
-            const koot = syote.value.split('-')
+            const koot = syote.value.split('-').map(n=>parseInt(n))
             for (let i = 0 ; i < koot.length ; ++i) {
                 // olisi voinut tehdä vaaditun silmukan tähänkin
                 teeKolmio(koot[i]);
