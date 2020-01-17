@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        body {
+            background-color: lightsteelblue;
+            max-width: 700px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            animation-name : trianglePrint;
+            animation-duration: 2s;
+        }
+        div, form, label {
+            display: block;
+            margin: 15 px auto;
+            background-color: slategray;
+            color: whitesmoke;
+            border-radius: 9px;
+            text-align: center;
+        }
+        input, button {
+            display: block;
+            margin: 15px auto;
+        }
+        div {
+            padding: 20px;
+        }
+        @keyframes trianglePrint {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Trianglifier</h1>
+    <form>
+        <label>Please specify sizes and amount of triangles to be printed, separated with hyphens. Specify "A" or "V" for direction of shape. Example input:
+            A3-V5-A2<input type="text" id="triangleInput"></label>
+        <button type="button" id="printButton">Trianglify!</button>
+    </form>
+    <div id="outputContainer">Enter data and press "Trianglify!" to continue</div>
+    <script>
+        document.getElementById("printButton").addEventListener("click", print);
+
+        function print() {
+            const input = document.getElementById("triangleInput").value;
+            let output = document.getElementById("outputContainer");
+
+            //erase previous print
+            output.innerText = ""
+
+            //generate array from input string w/ hyphen separator
+            const triangleArr = input.split("-");
+
+            //iterate over input array 
+            triangleArr.forEach(element => {
+
+                if (parseInt(element.substr(1)) > 0) { //ensure that the number is positive
+
+                    let para = document.createElement("p");
+
+                    //create upright triangle
+                    if (element[0] === "A") {
+
+                        for (let i = 0; i < parseInt(element.substr(1)); i++) {
+                            for (let j = 0; j <= i; j++) {
+                                para.innerHTML += "*"
+                                if (j === i) {
+                                    para.innerHTML += "<br>";
+                                }
+                            }
+                        }
+
+                    //create upside down triangle
+                    } else if (element[0] === "V") {
+                        for (let i = 0; i < parseInt(element.substr(1)); i++) {
+                            for (let j = parseInt(element.substr(1)-1); j >= i; j--) {
+                                para.innerHTML += "*"
+                                if (j === i) {
+                                    para.innerHTML += "<br>";
+                                }
+                            }
+                        }
+                    }
+                    output.appendChild(para);
+                } else {
+                    console.log("no negatives or zeroes allowed! positive vibes only.");
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>
