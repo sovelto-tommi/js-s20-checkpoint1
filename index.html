@@ -46,12 +46,12 @@
         if(kirjaimet[0].toLowerCase() === 'a'){
           //Tulostetaan tähdet 1-N:
           for(let x=1; x<=tahtia; x++){
-            output.innerHTML += tahti.repeat(x) + "<br>";
+            output.innerHTML += `<p> ${tahti.repeat(x)}</p>`;
           }
           //Jos V, tulostetaan kolmio toisinpäin:
         } else if (kirjaimet[0].toLowerCase() === 'v'){
             for(let z=tahtia; z>0;z--){
-              output.innerHTML += tahti.repeat(z) + "<br>";
+              output.innerHTML += `<p> ${tahti.repeat(z)}</p>`;
             }
         }
       }
