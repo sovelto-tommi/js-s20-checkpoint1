@@ -9,8 +9,29 @@
     <h1>Checkpoint 1</h1>
     <div>
         <input type="text" id="syote"/>
-        <button>Tee</button>
+        <button id='nappi' type="button">Tee</button>
     </div>
     <div id="tulos"></div>
+    <script>
+        const syote = document.getElementById('syote');
+        const tulos = document.getElementById('tulos');
+        document.getElementById('nappi').onclick = () => {
+            while(tulos.firstChild) {
+                tulos.removeChild(tulos.firstChild);
+            }
+            //console.log("Nappia painettu", syote.value)
+            const numerot = syote.value.split('-').map(n => parseInt(n));
+            // console.log('mapatty', numerot)
+            for(let i = 0 ; i < numerot.length ; ++i) {
+                tulostaKolmio(numerot[i]);
+            }
+        }
+        function tulostaKolmio(koko) {
+            for(let i = 1 ; i <= koko ; ++i) {
+                const tahdet = '*'.repeat(i);
+                tulos.innerHTML += `<p>${tahdet}</p>`
+            }
+        }
+    </script>
 </body>
 </html>
