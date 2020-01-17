@@ -1,16 +1,61 @@
 <!DOCTYPE html>
 <html lang="fi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.2">
-    <title>Checkpoint 1</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Checkpoint 1</title>
 </head>
 <body>
-    <h1>Checkpoint 1</h1>
-    <div>
-        <input type="text" id="syote"/>
-        <button>Tee</button>
-    </div>
-    <div id="tulos"></div>
+  <h1>Tähtikolmiot</h1>
+  <div class="input">
+    <label for="luvut">Syötä haluamasi lukumäärät väliviivalla erotettuna. Ilmoita kirjaimella haluttu tähtikolmion suunta (esim. A2-V3-A4) </label><br>
+    <input type="text" name="luvut" id="luvut"><br>
+    <button type="submit" id="nappi">Tulosta tähtikolmiot</button>
+  </div>
+  <br><br>
+  <div class="output">
+
+  </div>
+
+  <script>
+    const luvut = document.getElementById("luvut");
+    const output = document.querySelector(".output");
+    const nappi = document.getElementById("nappi");
+
+    const tahti = "*";
+
+    nappi.addEventListener("click", tulostaKolmiot);
+
+    function tulostaKolmiot(){
+      //Tyhjennetään output aina funktio suoritettaessa ja laitetaan luvut taulukkoon:
+      output.innerHTML = ""; 
+      let luvutTaulu = luvut.value.split("-");
+
+      for(let i=0; i<luvutTaulu.length; i++){
+        // Tsekataan kolmion suunta erottelmalla kirjaimet ja numerot:
+        let kirjaimet = luvutTaulu[i].match(/[a-zA-Z]/i)
+
+        let numerot = luvutTaulu[i].match(/\d/);
+
+        // Muutetaan ylempi numeromatch numeroksi:
+        let tahtia = parseInt(numerot[0], 10);
+
+        //Jos kirjain on A (tai a), tulostetaan "ylöspäin aukeava kolmio":
+
+        if(kirjaimet[0].toLowerCase() === 'a'){
+          //Tulostetaan tähdet 1-N:
+          for(let x=1; x<=tahtia; x++){
+            output.innerHTML += tahti.repeat(x) + "<br>";
+          }
+          //Jos V, tulostetaan kolmio toisinpäin:
+        } else if (kirjaimet[0].toLowerCase() === 'v'){
+            for(let z=tahtia; z>0;z--){
+              output.innerHTML += tahti.repeat(z) + "<br>";
+            }
+        }
+      }
+    }
+  </script>
 </body>
 </html>
