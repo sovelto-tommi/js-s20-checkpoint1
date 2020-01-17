@@ -9,8 +9,33 @@
     <h1>Checkpoint 1</h1>
     <div>
         <input type="text" id="syote"/>
-        <button>Tee</button>
+        <button type="button" id="nappi">Tee</button>
     </div>
     <div id="tulos"></div>
+    <script>
+        const tulos = document.getElementById('tulos');
+        const syote = document.getElementById('syote');
+        document.getElementById('nappi').onclick = () => {
+            tyhjennäTulosalue();
+            const koot = syote.value.split('-')
+            for (let i = 0 ; i < koot.length ; ++i) {
+                // olisi voinut tehdä vaaditun silmukan tähänkin
+                teeKolmio(koot[i]);
+            }
+        }
+        function teeKolmio(koko) {
+            for(let i = 0 ; i < koko ; ++i) {
+                const p = document.createElement('p');
+                const teksti = '*'.repeat(i+1);
+                p.innerText = teksti;
+                tulos.appendChild(p);
+            }
+        }
+        function tyhjennäTulosalue() {
+            while(tulos.lastChild) {
+                tulos.removeChild(tulos.lastChild);
+            }
+        }
+    </script>
 </body>
 </html>
